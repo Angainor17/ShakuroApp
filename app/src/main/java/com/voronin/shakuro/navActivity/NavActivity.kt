@@ -1,5 +1,6 @@
 package com.voronin.shakuro.navActivity
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
@@ -10,8 +11,10 @@ import com.voronin.shakuro.R
 import com.voronin.shakuro.app.App
 import com.voronin.shakuro.navActivity.viewModel.NavViewModel
 import com.voronin.shakuro.utils.KodeinViewModelFactory
+import com.voronin.shakuro.utils.getColoredVectorDrawable
 import kotlinx.android.synthetic.main.activity_main.*
 import org.kodein.di.generic.instance
+
 
 class NavActivity : AppCompatActivity() {
 
@@ -29,20 +32,43 @@ class NavActivity : AppCompatActivity() {
         viewModelInit()
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
     private fun viewModelInit() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(NavViewModel::class.java)
-        viewModel.screenLiveData.observe(this)
-        {
+        viewModel.screenLiveData.observe(this) {
             try {
                 navController.navigate(it.screenId, it.params)
             } catch (e: Exception) {
                 //need for library bug: Action throw exception on landscape mode change
             }
         }
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id != R.id.contributorListScreen) {
+                showBackBtn()
+            } else {
+                hideBackBtn()
+            }
+        }
     }
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)
+        setTitle(R.string.contributors)
+    }
+
+    private fun hideBackBtn() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    }
+
+    private fun showBackBtn() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        toolbar.navigationIcon = getColoredVectorDrawable(this, R.drawable.ic_arrow_back_24dp, Color.WHITE)
     }
 }
 
