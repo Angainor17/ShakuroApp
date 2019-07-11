@@ -1,5 +1,6 @@
 package com.voronin.shakuro.contributorsList.viewModel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.voronin.shakuro.app.App
@@ -15,22 +16,31 @@ class ContributorListViewModel : ViewModel() {
     private val coroutineContext: CoroutineContext = parentJob + Dispatchers.Default
     private val scope = CoroutineScope(coroutineContext)
 
-
-    val client: ContributorClient by App.Companion.kodein.instance()
+    private val client: ContributorClient by App.kodein.instance()
     val contributorsList = ArrayList<Contributor>()
     val contributorLiveData = MutableLiveData<ArrayList<Contributor>>()
 
     fun fetchList() {
         if (contributorsList.isEmpty()) {
-            try {
-                scope.launch {
-                    contributorLiveData.postValue(client.getContributors(0))
-                }
-            } catch (e: Exception) {
+            scope.launch {
+                try {
+                    val list = client.getContributors(0)
+                    contributorLiveData.postValue(list)
+                } catch (e: Exception) {
 
+                }
             }
         }
     }
 
-    fun cancelAllRequests() = coroutineContext.cancel()
+    fun onContributorSelected(it: Contributor) {
+        Log.d("debugCustom", "" + it.title)
+    }
+
+    private fun cancelAllRequests() = coroutineContext.cancel()
+
+    override fun onCleared() {
+        super.onCleared()
+        cancelAllRequests()
+    }
 }

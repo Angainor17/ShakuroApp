@@ -11,7 +11,6 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 import retrofit2.Retrofit
 
-
 class App : Application() {
 
     companion object {

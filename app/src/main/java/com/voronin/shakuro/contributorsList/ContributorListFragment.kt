@@ -21,7 +21,7 @@ class ContributorListFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ContributorListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ContributorListViewModel::class.java)
         viewModel.contributorLiveData.observe(this) {
             listAdapter.update(it)
         }
@@ -41,5 +41,6 @@ class ContributorListFragment : BaseFragment() {
         contributorList.itemAnimator = DefaultItemAnimator()
         contributorList.layoutManager = LinearLayoutManager(context)
         contributorList.adapter = listAdapter
+        listAdapter.onClickListener = {viewModel.onContributorSelected(it)}
     }
 }

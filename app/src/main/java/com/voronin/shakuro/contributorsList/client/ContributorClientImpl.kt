@@ -11,6 +11,6 @@ class ContributorClientImpl(retrofit: Retrofit) : ContributorClient {
     private val contributorApi = retrofit.create(ContributorApi::class.java)
 
     override suspend fun getContributors(since: Int) =
-        ArrayList(contributorApi.getContributors(since).await().map { Contributor(it) })
+        ArrayList(contributorApi.getContributors(since).map { Contributor(it) })
 
 }

@@ -1,4 +1,4 @@
-package com.voronin.shakuro.contributorsList.client
+package com.voronin.shakuro.contributorsList.models
 
 import com.google.gson.annotations.SerializedName
 

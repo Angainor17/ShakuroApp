@@ -12,6 +12,6 @@ abstract class BaseFragment : Fragment(), KodeinAware {
 
     override val kodein: Kodein = App.kodein
 
-    val viewModelFactory: KodeinViewModelFactory = KodeinViewModelFactory(kodein)
+//    val viewModelFactory: KodeinViewModelFactory = KodeinViewModelFactory(kodein)
 
 }

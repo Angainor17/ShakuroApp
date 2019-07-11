@@ -1,7 +1,5 @@
 package com.voronin.shakuro.contributorsList.models
 
-import com.voronin.shakuro.contributorsList.client.ContributorResponse
-
 /**
  * Contributor business model
  */
