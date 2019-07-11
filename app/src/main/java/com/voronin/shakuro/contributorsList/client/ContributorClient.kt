@@ -1,10 +1,9 @@
 package com.voronin.shakuro.contributorsList.client
 
-/**
- * TODO
- */
+import com.voronin.shakuro.contributorsList.models.Contributor
+
 interface ContributorClient {
 
-
+    suspend fun getContributors(since: Int): ArrayList<Contributor>
 
 }

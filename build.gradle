@@ -16,7 +16,9 @@ buildscript {
             testRunner           : '1.2.0',
             espresso             : '3.2.0',
             robolectric          : '4.2',
-            powermock            : '1.6.1'
+            powermock            : '1.6.1',
+            databinding          : '3.4.2',
+            picasso          : '2.71828'
     ]
 
     ext.gson = [
@@ -31,8 +33,12 @@ buildscript {
             core: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
     ]
 
+    ext.picasso = [
+            core: "com.squareup.picasso:picasso:$versions.picasso"
+    ]
+
     ext.retrofit = [
-            core         : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+            core             : "com.squareup.retrofit2:retrofit:$versions.retrofit",
             gsonConverter    : "com.squareup.retrofit2:converter-gson:$versions.retrofitGsonConverter",
             coroutinesAdapter: "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$versions.coroutinesAdapter"
     ]
@@ -42,8 +48,10 @@ buildscript {
             coreKtx           : "androidx.core:core-ktx:$versions.androidxAppcompat",
             constraintlayout  : "androidx.constraintlayout:constraintlayout:$versions.constraintlayout",
             lifecycle         : "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleExtension",
+            liveData         : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.livedata",
             navigationFragment: "androidx.navigation:navigation-fragment-ktx:$versions.navigation",
-            navigationUI      : "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+            navigationUI      : "androidx.navigation:navigation-ui-ktx:$versions.navigation",
+            databinding       : "androidx.databinding:databinding-runtime:$versions.databinding"
     ]
 
     ext.test = [
@@ -51,7 +59,6 @@ buildscript {
             testRunner         : "androidx.test:runner:$versions.testRunner",
             espresso           : "androidx.test.espresso:espresso-core:$versions.espresso",
             robolectric        : "org.robolectric:robolectric:$versions.robolectric",
-//            junit4             : "org.powermock:powermock-module-junit4:$versions.powermock",
             rule               : "org.powermock:powermock-module-junit4-rule:$versions.powermock",
             mockitoApi         : "org.powermock:powermock-api-mockito:$versions.powermock",
             classloadingXstream: "org.powermock:powermock-classloading-xstream:$versions.powermock"

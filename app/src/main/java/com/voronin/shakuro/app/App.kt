@@ -14,8 +14,10 @@ import retrofit2.Retrofit
 
 class App : Application() {
 
-    val kodein = Kodein {
-        bind<Retrofit>() with singleton { createRetrofit(GITHUB_BASE_URL) }
-        bind<ContributorClient>() with singleton { ContributorClientImpl(instance()) }
+    companion object {
+        val kodein = Kodein {
+            bind<Retrofit>() with singleton { createRetrofit(GITHUB_BASE_URL) }
+            bind<ContributorClient>() with singleton { ContributorClientImpl(instance()) }
+        }
     }
 }
