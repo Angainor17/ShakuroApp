@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.voronin.shakuro.R
@@ -14,7 +13,6 @@ import com.voronin.shakuro.utils.KodeinViewModelFactory
 import com.voronin.shakuro.utils.getColoredVectorDrawable
 import kotlinx.android.synthetic.main.activity_main.*
 import org.kodein.di.generic.instance
-
 
 class NavActivity : AppCompatActivity() {
 
@@ -39,13 +37,7 @@ class NavActivity : AppCompatActivity() {
 
     private fun viewModelInit() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(NavViewModel::class.java)
-        viewModel.screenLiveData.observe(this) {
-            try {
-                navController.navigate(it.screenId, it.params)
-            } catch (e: Exception) {
-                //need for library bug: Action throw exception on landscape mode change
-            }
-        }
+        viewModel.onScreenChange = { navController.navigate(it.screenId, it.params) }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id != R.id.contributorListScreen) {

@@ -1,15 +1,14 @@
 package com.voronin.shakuro.navActivity.viewModel
 
 import android.os.Bundle
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.voronin.shakuro.navActivity.ScreenInfo
 
 class NavViewModel : ViewModel() {
 
-    val screenLiveData = MutableLiveData<ScreenInfo>()
+    var onScreenChange: ((ScreenInfo) -> Unit)? = null
 
     fun navigateScreen(screen: Int, params: Bundle? = null) {
-        screenLiveData.postValue(ScreenInfo(screen, params))
+        onScreenChange?.invoke(ScreenInfo(screen, params))
     }
 }

@@ -5,15 +5,20 @@ import androidx.annotation.NonNull
 import androidx.core.os.bundleOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.PagedList
 import androidx.paging.PositionalDataSource
+import androidx.recyclerview.widget.DiffUtil
 import com.voronin.shakuro.R
 import com.voronin.shakuro.app.App
+import com.voronin.shakuro.contributorsList.adapters.ContributorListAdapter
 import com.voronin.shakuro.contributorsList.client.ContributorClient
 import com.voronin.shakuro.contributorsList.models.CONTRIBUTOR_TAG
 import com.voronin.shakuro.contributorsList.models.Contributor
 import com.voronin.shakuro.navActivity.viewModel.NavViewModel
+import com.voronin.shakuro.utils.MainThreadExecutor
 import kotlinx.coroutines.*
 import org.kodein.di.generic.instance
+import java.util.concurrent.Executors
 import kotlin.coroutines.CoroutineContext
 
 const val PAGE_SIZE = 30
@@ -30,13 +35,33 @@ class ContributorListViewModel : ViewModel() {
     val loadingLiveData = MutableLiveData<Boolean>()
 
     val dataSource = ContributorDataSource()
+    var listAdapter: ContributorListAdapter
+
+    init {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setPageSize(PAGE_SIZE)
+            .build()
+
+        val pagedList = PagedList.Builder<Int, Contributor>(dataSource, config)
+            .setFetchExecutor(Executors.newSingleThreadExecutor())
+            .setNotifyExecutor(MainThreadExecutor())
+            .build()
+
+        listAdapter = ContributorListAdapter(object : DiffUtil.ItemCallback<Contributor>() {
+            override fun areItemsTheSame(oldItem: Contributor, newItem: Contributor) = oldItem == newItem
+            override fun areContentsTheSame(oldItem: Contributor, newItem: Contributor) = oldItem == newItem
+        })
+        listAdapter.onClickListener = { onContributorSelected(it) }
+        listAdapter.submitList(pagedList)
+    }
 
     override fun onCleared() {
         super.onCleared()
         cancelAllRequests()
     }
 
-    fun onContributorSelected(it: Contributor) {
+    private fun onContributorSelected(it: Contributor) {
         navViewModel.navigateScreen(
             R.id.action_contributorListScreen_to_contributorDetailScreen,
             bundleOf(CONTRIBUTOR_TAG to it)
