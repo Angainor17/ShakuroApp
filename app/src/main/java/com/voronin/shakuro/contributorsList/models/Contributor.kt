@@ -7,7 +7,7 @@ const val CONTRIBUTOR_TAG = "contributor"
 /**
  * Contributor business model
  */
-class Contributor(apiModel: ContributorResponse) : Serializable {
+data class Contributor(val apiModel: ContributorResponse) : Serializable {
     val title: String = apiModel.login
     val subTitle: String = apiModel.id.toString()
     val avatarUrl: String = apiModel.avatarUrl

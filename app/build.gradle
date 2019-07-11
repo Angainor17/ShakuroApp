@@ -47,6 +47,7 @@ dependencies {
     implementation androidx.liveData
     implementation androidx.navigationFragment
     implementation androidx.navigationUI
+    implementation androidx.paging
 
     testImplementation test.junit
     androidTestImplementation test.testRunner

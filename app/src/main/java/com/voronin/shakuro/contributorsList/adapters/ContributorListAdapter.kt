@@ -3,31 +3,25 @@ package com.voronin.shakuro.contributorsList.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.voronin.shakuro.R
 import com.voronin.shakuro.contributorsList.models.Contributor
 import com.voronin.shakuro.databinding.ContributorListItemBinding
 
-class ContributorListAdapter : RecyclerView.Adapter<ContributorListAdapter.ViewHolder>() {
+class ContributorListAdapter(diffCallback: DiffUtil.ItemCallback<Contributor>) :
+    PagedListAdapter<Contributor, ContributorListAdapter.ViewHolder>(diffCallback) {
 
-    private val items: ArrayList<Contributor> = ArrayList()
     var onClickListener: ((contributor: Contributor) -> Unit)? = null
-
-    fun update(items: ArrayList<Contributor>) {
-        this.items.clear()
-        this.items.addAll(items)
-        notifyDataSetChanged()
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(ContributorListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
-    override fun getItemCount() = items.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = items[position]
+        val item = getItem(position)
         holder.binding.contributor = item
-        holder.background.setOnClickListener { onClickListener?.invoke(item) }
+        holder.background.setOnClickListener { onClickListener?.invoke(item!!) }
     }
 
     class ViewHolder(val binding: ContributorListItemBinding) : RecyclerView.ViewHolder(binding.root) {

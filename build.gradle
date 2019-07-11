@@ -18,7 +18,8 @@ buildscript {
             robolectric          : '4.2',
             powermock            : '1.6.1',
             databinding          : '3.4.2',
-            picasso          : '2.71828'
+            picasso              : '2.71828',
+            paging               : '1.0.1'
     ]
 
     ext.gson = [
@@ -48,10 +49,11 @@ buildscript {
             coreKtx           : "androidx.core:core-ktx:$versions.androidxAppcompat",
             constraintlayout  : "androidx.constraintlayout:constraintlayout:$versions.constraintlayout",
             lifecycle         : "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleExtension",
-            liveData         : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.livedata",
+            liveData          : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.livedata",
             navigationFragment: "androidx.navigation:navigation-fragment-ktx:$versions.navigation",
             navigationUI      : "androidx.navigation:navigation-ui-ktx:$versions.navigation",
-            databinding       : "androidx.databinding:databinding-runtime:$versions.databinding"
+            databinding       : "androidx.databinding:databinding-runtime:$versions.databinding",
+            paging       : "android.arch.paging:runtime:$versions.paging"
     ]
 
     ext.test = [
