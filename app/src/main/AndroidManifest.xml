@@ -13,7 +13,7 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".app.MainActivity">
+        <activity android:name=".navActivity.NavActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

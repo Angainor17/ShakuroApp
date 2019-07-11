@@ -12,6 +12,18 @@
             android:label="Posts"
 
             tools:layout="@layout/contributor_list_fragment">
+
+        <action
+                android:id="@+id/action_contributorListScreen_to_contributorDetailScreen"
+
+                app:destination="@id/contributorDetailScreen"
+                app:popUpTo="@+id/contributorListScreen"
+                app:launchSingleTop="true"
+                app:enterAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"/>
+
     </fragment>
 
     <fragment
