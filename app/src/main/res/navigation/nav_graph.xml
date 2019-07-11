@@ -9,7 +9,7 @@
             android:id="@+id/contributorListScreen"
 
             android:name="com.voronin.shakuro.contributorsList.ContributorListFragment"
-            android:label="Posts"
+            android:label="Contributors"
 
             tools:layout="@layout/contributor_list_fragment">
 
@@ -18,8 +18,8 @@
 
                 app:destination="@id/contributorDetailScreen"
                 app:popUpTo="@+id/contributorListScreen"
-                app:launchSingleTop="true"
                 app:enterAnim="@anim/slide_in_right"
+                app:launchSingleTop="false"
                 app:popExitAnim="@anim/slide_out_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"/>
@@ -30,7 +30,7 @@
             android:id="@+id/contributorDetailScreen"
 
             android:name="com.voronin.shakuro.contributorDetail.ContributorDetailFragment"
-            android:label="Posts"
+            android:label="Contributor"
 
             tools:layout="@layout/contributor_detail_fragment">
     </fragment>

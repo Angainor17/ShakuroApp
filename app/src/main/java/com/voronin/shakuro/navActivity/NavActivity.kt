@@ -10,6 +10,7 @@ import com.voronin.shakuro.R
 import com.voronin.shakuro.app.App
 import com.voronin.shakuro.navActivity.viewModel.NavViewModel
 import com.voronin.shakuro.utils.KodeinViewModelFactory
+import kotlinx.android.synthetic.main.activity_main.*
 import org.kodein.di.generic.instance
 
 class NavActivity : AppCompatActivity() {
@@ -22,12 +23,26 @@ class NavActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(NavViewModel::class.java)
+        initToolbar()
 
-        viewModel.screenLiveData.observe(this) {
-            navController.navigate(it.screenId, it.params)
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        viewModelInit()
+    }
+
+    private fun viewModelInit() {
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(NavViewModel::class.java)
+        viewModel.screenLiveData.observe(this)
+        {
+            try {
+                navController.navigate(it.screenId, it.params)
+            } catch (e: Exception) {
+                //need for library bug: Action throw exception on landscape mode change
+            }
         }
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
     }
 }
 

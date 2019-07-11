@@ -13,6 +13,10 @@ class ContributorDetailViewModel : ViewModel() {
 
     fun initialize(it: Bundle?) {
         contributor = it?.get(CONTRIBUTOR_TAG) as Contributor
+        refreshScreen()
+    }
+
+    fun refreshScreen() {
         contributor.let {
             liveData.postValue(it)
         }

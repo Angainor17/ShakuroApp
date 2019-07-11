@@ -23,6 +23,7 @@ class ContributorDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ContributorDetailViewModel::class.java)
+        viewModel.refreshScreen()
         arguments.let {
             viewModel.initialize(it)
         }
