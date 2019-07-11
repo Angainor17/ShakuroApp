@@ -24,9 +24,7 @@ class ContributorDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ContributorDetailViewModel::class.java)
         viewModel.refreshScreen()
-        arguments.let {
-            viewModel.initialize(it)
-        }
+        arguments.let { viewModel.initialize(it) }
 
         viewModel.liveData.observe(this) {
             dataBinding.contributor = it

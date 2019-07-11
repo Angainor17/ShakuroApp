@@ -20,7 +20,6 @@ import com.voronin.shakuro.utils.MainThreadExecutor
 import kotlinx.android.synthetic.main.contributor_list_fragment.*
 import java.util.concurrent.Executors
 
-
 class ContributorListFragment : Fragment() {
 
     private lateinit var viewModel: ContributorListViewModel
