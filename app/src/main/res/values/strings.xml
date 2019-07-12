@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ShakuroApp</string>
     <string name="contributors">Contributors</string>
+    <string name="no_internet_connection">No Connection</string>
 </resources>

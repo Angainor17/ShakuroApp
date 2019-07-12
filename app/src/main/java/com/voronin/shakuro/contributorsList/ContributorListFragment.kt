@@ -33,7 +33,6 @@ class ContributorListFragment : Fragment() {
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(ContributorListViewModel::class.java)
         viewModel.loadingLiveData.observe(this) {
-            swipeRefresh.isEnabled = it
             swipeRefresh.isRefreshing = it
         }
     }
@@ -43,6 +42,8 @@ class ContributorListFragment : Fragment() {
         contributorList.layoutManager = LinearLayoutManager(context)
         contributorList.adapter = viewModel.listAdapter
 
-        swipeRefresh.isEnabled = false
+        swipeRefresh.setOnRefreshListener {
+            viewModel.onSwipeRefresh()
+        }
     }
 }
