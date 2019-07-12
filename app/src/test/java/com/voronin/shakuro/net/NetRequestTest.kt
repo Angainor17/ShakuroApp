@@ -8,7 +8,4 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @PowerMockIgnore(value = ["org.mockito.*", "org.robolectric.*", "android.*"])
 @Config(sdk = [26])
-abstract class NetRequestTest {
-
-
-}
+abstract class NetRequestTest
